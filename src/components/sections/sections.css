@@ -1,3 +1,23 @@
+.dossier__header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.1rem;
+}
+
+.dossier__photo {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+.dossier__legal {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+}
+
 .dossier__title,
 .skill-group h3,
 .edu h3,
@@ -275,8 +295,67 @@
 }
 
 .waka__embed img {
-  width: 100%;
+  width: min(100%, 420px);
   border-radius: 8px;
+  background: #fff;
+}
+
+.waka__summary {
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.waka__total {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.waka__chart {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.waka__chart--secondary {
+  margin-top: 1rem;
+}
+
+.waka__chart ul {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.waka__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.waka__row span:last-child {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.waka__bar {
+  margin-top: 0.35rem;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.waka__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
 }
 
 .contact__actions {

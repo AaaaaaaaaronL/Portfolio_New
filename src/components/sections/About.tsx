@@ -15,7 +15,17 @@ export function About() {
         <p className="section-sub">{site.about.body}</p>
 
         <div className="dossier panel">
-          <h3 className="dossier__title">Personal dossier</h3>
+          <div className="dossier__header">
+            <img
+              className="dossier__photo"
+              src={site.about.photo}
+              alt={`${site.name} portrait`}
+            />
+            <div>
+              <h3 className="dossier__title">Personal dossier</h3>
+              <p className="dossier__legal">{site.legalName}</p>
+            </div>
+          </div>
           <dl className="dossier__grid">
             {site.about.dossier.map((row) => (
               <div key={row.label} className="dossier__row">

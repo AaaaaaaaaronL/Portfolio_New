@@ -23,6 +23,8 @@ When ready, set `social.whatsapp` in `site.ts` to your `https://wa.me/...` link.
 
 Update `certificates.items[].href` for credential links. LCCI stays `null` (display only).
 
-## WakaTime
+## Photos
 
-Update `wakatime.profileUrl` / embed if your share URL changes.
+- Portrait used in dossier: `content/images/aaron-portrait.png`
+- Also serve from: `public/images/aaron-portrait.png`
+- Path in `site.ts`: `about.photo`

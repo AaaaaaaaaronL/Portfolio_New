@@ -56,32 +56,32 @@ export const site = {
   },
   desk: {
     objects: [
-      { id: "dossier", label: "Dossier", target: "about", hint: "About me" },
-      { id: "laptop", label: "Laptop", target: "projects", hint: "Projects" },
+      { id: "dossier", label: "Dossier", modal: "dossier", hint: "About me" },
+      { id: "laptop", label: "Laptop", modal: "projects", hint: "Projects" },
       {
         id: "folder",
         label: "Folder",
-        target: "experience",
+        modal: "experience",
         hint: "Experience",
       },
       {
         id: "certs",
         label: "Certificates",
-        target: "certificates",
+        modal: "certificates",
         hint: "Certificates",
       },
-      { id: "note", label: "Sticky note", target: "wakatime", hint: "WakaTime" },
       {
         id: "envelope",
         label: "Envelope",
-        target: "contact",
-        hint: "Contact & resumes",
+        modal: "contact",
+        hint: "Contact card",
       },
     ],
   },
   about: {
     headline: "Hi, I'm Aaron.",
     body: "I like learning new things and turning unclear problems into clear next steps — whether that means shipping web features or guiding someone through a tough support case. I am not limited to one lane: I build, I listen, and I communicate under pressure.",
+    photo: "/images/aaron-portrait.png",
     dossier: [
       { label: "Nickname", value: "Aaron" },
       { label: "Legal name", value: "Chun Kiat Lwi" },
@@ -172,21 +172,38 @@ export const site = {
         skills: ["Python", "Laravel", "Flutter", "SQL Server"],
       },
       {
-        id: "startek",
+        id: "startek-uk",
+        category: "cs" as const,
+        title: "Customer Service Representative",
+        company: "Startek Malaysia",
+        employmentType: "Full-time",
+        location: "Johor, Malaysia · On-site",
+        start: "Nov 2022",
+        end: "Mar 2023",
+        bullets: [
+          "Handled outbound calls to merchants in the UK and Ireland to confirm information and assist when support was needed.",
+          "Maintained clear, professional communication across international cases and time-sensitive requests.",
+          "Adapted quickly to a new regional queue after transitioning from the Taiwan line.",
+          "Used BLISS as part of daily operations tooling.",
+        ],
+        skills: ["BLISS", "Outbound", "UK & Ireland"],
+      },
+      {
+        id: "startek-taiwan",
         category: "cs" as const,
         title: "Customer Service Representative",
         company: "Startek Malaysia",
         employmentType: "Full-time",
         location: "Johor, Malaysia · On-site",
         start: "May 2022",
-        end: "Mar 2023",
+        end: "Nov 2022",
         bullets: [
-          "Started with inbound support for customers in Taiwan — handling written and phone inquiries with patience and clarity.",
-          "Transitioned to outbound merchant support for the UK and Ireland, confirming information and assisting when merchants needed help.",
-          "Built confidence communicating across regions, languages, and high-volume service environments.",
-          "Worked with Salesforce Sales Cloud and BLISS as part of daily operations tooling.",
+          "Provided inbound support for customers in Taiwan via written messages and phone calls.",
+          "Resolved issues with patience and clarity while keeping service quality consistent under volume.",
+          "Built a foundation in empathy-led communication and case handling.",
+          "Worked with Salesforce Sales Cloud in day-to-day operations.",
         ],
-        skills: ["Salesforce Sales Cloud", "BLISS", "Inbound", "Outbound"],
+        skills: ["Salesforce Sales Cloud", "Inbound", "Taiwan"],
       },
     ],
   },
@@ -198,7 +215,7 @@ export const site = {
         id: "fyp",
         title: "Grievance Management System (FYP)",
         description:
-          "A grievance ticketing system built with teammates Mr. Foo and Mr. Teo. I owned the web frontend UI — focusing on clear flows for users submitting feedback and admins managing cases.",
+          "A full grievance ticketing platform developed with teammates Mr. Foo and Mr. Teo for our Final Year Project. The system lets users submit feedback or complaints, while admins review, categorize, and resolve cases with role-based access. I owned the web frontend UI — shaping clear submission flows, readable case views, and admin screens so both sides could move through the process without confusion. The project later earned Gold awards at InIIC and the Virtual Innovation Competition.",
         stack: ["Flutter", "Laravel", "Tailwind CSS", "Frontend UI"],
         links: [
           {
@@ -211,7 +228,7 @@ export const site = {
         id: "clinic",
         title: "Clinic Subscription System",
         description:
-          "Built during my internship: a web system with CRUD, authorization, and history viewing for clinic subscription management.",
+          "Built during my internship at GPIS Solutions as a practical clinic subscription management web app. It supports core CRUD workflows, user authorization, and history viewing so staff can track subscription records over time. I focused on making everyday actions reliable and understandable — create, update, review past activity — while integrating with SQL Server on a Laravel backend. This project strengthened my full-stack habits around auth, data handling, and real workplace requirements.",
         stack: ["Laravel", "SQL Server", "CRUD", "Auth"],
         links: [
           {
@@ -224,7 +241,7 @@ export const site = {
         id: "python",
         title: "Python Experiments",
         description:
-          "Hands-on Python work: web scraping / automation scripts, plus a finger-tracking calculator using MediaPipe and OpenCV.",
+          "A set of hands-on Python experiments for learning by shipping small, usable tools. One track covers automation and web scraping with Selenium for repetitive browser tasks. Another explores computer vision: a finger-tracking calculator built with MediaPipe and OpenCV, where hand gestures drive the interface. Together they reflect how I learn — start with curiosity, then turn it into something interactive I can demo and improve.",
         stack: ["Python", "Selenium", "MediaPipe", "OpenCV"],
         links: [
           {
@@ -383,11 +400,9 @@ export const site = {
   wakatime: {
     headline: "WakaTime",
     subhead: "A living snapshot of how I spend time learning and building.",
+    username: "Aaron_Lwi",
     profileUrl: "https://wakatime.com/@Aaron_Lwi",
-    /** Official embed — may require public profile settings */
-    embedSrc:
-      "https://wakatime.com/share/@Aaron_Lwi/placeholder.svg",
-    note: "Open my WakaTime profile for full charts and language breakdowns.",
+    note: "Stats below are loaded live from the WakaTime public API.",
   },
   contact: {
     headline: "Let’s explore how we can grow.",
