@@ -1,14 +1,13 @@
-import { useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import {
   motion,
-  useMotionTemplate,
+  useMotionValueEvent,
   useScroll,
   useTransform,
 } from "framer-motion";
 import { site } from "@content/site";
 import { ResumeMenu } from "./ResumeMenu";
 import { Atmosphere } from "./Atmosphere";
-import { Flashlight } from "./Flashlight";
 import type { DeskModalId } from "./DeskModals";
 import {
   CertificatesModal,
@@ -19,132 +18,73 @@ import {
 } from "./DeskModalViews";
 import "./DeskExperience.css";
 
+const DeskScene3D = lazy(() =>
+  import("./desk3d/DeskScene3D").then((m) => ({ default: m.DeskScene3D })),
+);
+
 export function DeskExperience() {
   const ref = useRef<HTMLElement>(null);
   const [modal, setModal] = useState<DeskModalId | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.62], [0.38, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.62], [110, 0]);
-  const beamOpacity = useTransform(scrollYProgress, [0, 0.18, 0.55], [0.25, 0.8, 0.4]);
-  const beamWidth = useTransform(scrollYProgress, [0, 0.62], [14, 48]);
-  const uiOpacity = useTransform(scrollYProgress, [0.4, 0.62], [0, 1]);
-  const hintOpacity = useTransform(scrollYProgress, [0.55, 0.7, 0.9], [0, 1, 0.35]);
-  const beamWidthPx = useMotionTemplate`${beamWidth}%`;
+  useMotionValueEvent(scrollYProgress, "change", (v) => setProgress(v));
 
-  const openModal = (id: DeskModalId) => {
-    setDrawerOpen(false);
-    setModal(id);
-  };
+  const uiOpacity = useTransform(scrollYProgress, [0.35, 0.58], [0, 1]);
+  const hintOpacity = useTransform(scrollYProgress, [0.5, 0.68, 0.9], [0, 1, 0.4]);
+
+  const openModal = (id: DeskModalId) => setModal(id);
   const closeModal = () => setModal(null);
 
   return (
     <section className="desk" id="top" ref={ref}>
       <div className="desk__sticky">
         <Atmosphere variant="hero" />
-        <Flashlight enabled={!modal} />
 
-        <div className="desk__void" aria-hidden>
-          <motion.div
-            className="desk__beam"
-            style={{ opacity: beamOpacity, width: beamWidthPx }}
-          />
-          <div className="desk__vignette" />
+        <div className="desk__canvas-wrap" aria-hidden={Boolean(modal)}>
+          <Suspense fallback={<div className="desk3d desk3d--loading">Loading desk…</div>}>
+            <DeskScene3D
+              progress={progress}
+              enabled={!modal}
+              onOpen={openModal}
+            />
+          </Suspense>
         </div>
 
-        <motion.div className="desk__stage" style={{ scale, y }}>
-          <div className="desk__legs" aria-hidden>
-            <span />
-            <span />
-          </div>
-
-          <div className="desk__surface">
-            <div className="desk__edge" aria-hidden />
-            <div className="desk__grain" aria-hidden />
-            <div className="desk__lamp" aria-hidden />
-
-            <button
-              className="desk-object desk-object--dossier"
-              onClick={() => openModal("dossier")}
-              aria-label="Open personal dossier"
-            >
-              <span className="desk-object__sheen" />
-              <span className="desk-object__label">Dossier</span>
-            </button>
-
-            <button
-              className="desk-object desk-object--laptop"
-              onClick={() => openModal("projects")}
-              aria-label="Open projects on laptop"
-            >
-              <span className="desk-object__screen" />
-              <span className="desk-object__label">Projects</span>
-            </button>
-
-            <button
-              className="desk-object desk-object--folder"
-              onClick={() => openModal("experience")}
-              aria-label="Open experience folder"
-            >
-              <span className="desk-object__papers" aria-hidden />
-              <span className="desk-object__badge">Experience</span>
-              <span className="desk-object__label">Experience</span>
-            </button>
-
-            <button
-              className="desk-object desk-object--certs"
-              onClick={() => openModal("certificates")}
-              aria-label="Open certificates"
-            >
-              <span className="desk-object__label">Certificates</span>
-            </button>
-
-            <button
-              className="desk-object desk-object--envelope"
-              onClick={() => openModal("contact")}
-              aria-label="Open contact card"
-            >
-              <span className="desk-object__label">Contact</span>
-            </button>
-
-            <div className="desk__mug" aria-hidden />
-
-            <button
-              type="button"
-              className={`desk__drawer ${drawerOpen ? "is-open" : ""}`}
-              aria-expanded={drawerOpen}
-              aria-label={drawerOpen ? "Close desk drawer" : "Open desk drawer"}
-              onClick={() => setDrawerOpen((v) => !v)}
-            >
-              <span className="desk__drawer-handle" />
-              <span className="desk__drawer-label">{drawerOpen ? "Close" : "Open drawer"}</span>
-            </button>
-
-            <div className={`desk__drawer-tray ${drawerOpen ? "is-open" : ""}`}>
-              {site.desk.objects.map((obj) => (
-                <button
-                  key={obj.id}
-                  type="button"
-                  className="desk__drawer-item"
-                  onClick={() => openModal(obj.modal)}
-                >
-                  {obj.hint}
-                </button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
         <motion.div className="desk__hero" style={{ opacity: uiOpacity }}>
-          <p className="desk__kicker">Portfolio</p>
-          <h1>{site.tagline}</h1>
-          <p className="desk__subtitle">{site.subtitle}</p>
-          <div className="desk__cta">
+          <motion.p
+            className="desk__kicker"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+          >
+            Portfolio
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.08 }}
+          >
+            {site.tagline}
+          </motion.h1>
+          <motion.p
+            className="desk__subtitle"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.18 }}
+          >
+            {site.subtitle}
+          </motion.p>
+          <motion.div
+            className="desk__cta"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <ResumeMenu />
             <a className="btn" href={site.social.linkedin} target="_blank" rel="noreferrer">
               LinkedIn
@@ -152,38 +92,40 @@ export function DeskExperience() {
             <button className="btn" type="button" onClick={() => openModal("contact")}>
               Contact
             </button>
-          </div>
+          </motion.div>
           <motion.p className="desk__hint" style={{ opacity: hintOpacity }}>
-            Use the flashlight · click objects · or open the drawer
+            Scroll to approach · click objects on the desk
           </motion.p>
         </motion.div>
 
         <div className="desk__mobile" aria-label="Desk shortcuts">
-          <p className="desk__mobile-title">{site.tagline}</p>
+          <motion.p
+            className="desk__mobile-title"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {site.tagline}
+          </motion.p>
           <p className="desk__mobile-sub">{site.subtitle}</p>
           <div className="desk__mobile-cta">
             <ResumeMenu />
           </div>
           <div className="desk__mobile-rail">
-            {site.desk.objects.map((obj) => (
-              <button
+            {site.desk.objects.map((obj, i) => (
+              <motion.button
                 key={obj.id}
                 type="button"
                 className={`desk__mobile-card desk__mobile-card--${obj.id}`}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.08 * i }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => openModal(obj.modal)}
               >
                 <span className="desk__mobile-icon" aria-hidden />
                 <span>{obj.hint}</span>
-              </button>
+              </motion.button>
             ))}
-            <button
-              type="button"
-              className="desk__mobile-card desk__mobile-card--drawer"
-              onClick={() => openModal("experience")}
-            >
-              <span className="desk__mobile-icon" aria-hidden />
-              <span>Open drawer · Experience</span>
-            </button>
           </div>
         </div>
       </div>

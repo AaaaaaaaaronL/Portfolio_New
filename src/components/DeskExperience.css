@@ -1,6 +1,6 @@
 .desk {
   position: relative;
-  height: 220vh;
+  height: 240vh;
 }
 
 .desk__sticky {
@@ -13,13 +13,46 @@
   background: #030303;
 }
 
-.desk__void {
+.desk__canvas-wrap {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  background:
-    radial-gradient(ellipse at 50% 10%, rgba(40, 48, 62, 0.28) 0%, transparent 55%);
-  pointer-events: none;
+  z-index: 2;
+}
+
+.desk3d {
+  width: 100%;
+  height: 100%;
+}
+
+.desk3d--loading {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.desk3d canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  touch-action: none;
+}
+
+.desk__void {
+  display: none;
+}
+
+.desk__perspective,
+.desk__stage,
+.desk__shadow,
+.desk__legs,
+.desk__thickness,
+.desk__surface,
+.desk__drawer,
+.desk__drawer-tray {
+  /* legacy CSS desk kept out of layout when 3D is active */
 }
 
 .desk__beam {
@@ -48,40 +81,82 @@
   z-index: 1;
 }
 
+.desk__perspective {
+  position: relative;
+  z-index: 3;
+  width: min(980px, 96vw);
+  height: min(620px, 72vh);
+  perspective: 1100px;
+  perspective-origin: 50% 45%;
+  display: grid;
+  place-items: center;
+}
+
 .desk__stage {
   position: relative;
-  width: min(960px, 94vw);
-  transform-origin: 50% 70%;
+  width: min(860px, 92%);
+  transform-style: preserve-3d;
+  transform-origin: 50% 85%;
   will-change: transform;
-  z-index: 3;
+}
+
+.desk__shadow {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -28px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55), transparent 70%);
+  filter: blur(8px);
+  transform: translateZ(-40px) rotateX(90deg);
+  pointer-events: none;
 }
 
 .desk__legs {
   position: absolute;
-  left: 10%;
-  right: 10%;
-  bottom: -42px;
-  height: 48px;
-  display: flex;
-  justify-content: space-between;
+  inset: auto 8% -56px;
+  height: 70px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
   pointer-events: none;
+  transform-style: preserve-3d;
+  transform: translateZ(-12px);
 }
 
 .desk__legs span {
-  width: 18px;
+  width: 16px;
   height: 100%;
-  background: linear-gradient(180deg, #5a3a22, #24150c);
+  margin: 0 auto;
+  background: linear-gradient(180deg, #6a4528, #24150c);
   border-radius: 0 0 4px 4px;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 0 0 rgba(0, 0, 0, 0.25);
+  transform: rotateX(-8deg);
+}
+
+.desk__thickness {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 78px;
+  height: 26px;
+  border-radius: 0 0 14px 14px;
+  background: linear-gradient(180deg, #7a5230, #3a2414);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(12px) rotateX(-85deg);
+  transform-origin: top center;
+  pointer-events: none;
 }
 
 .desk__surface {
   position: relative;
-  height: clamp(300px, 44vw, 460px);
+  height: clamp(300px, 40vw, 430px);
   margin-bottom: 96px;
-  border-radius: 20px 20px 12px 12px;
+  border-radius: 18px;
+  transform-style: preserve-3d;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 26%),
     repeating-linear-gradient(
       90deg,
       #b1895c 0px,
@@ -90,10 +165,36 @@
       #8a5e38 24px
     );
   box-shadow:
-    0 50px 90px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -22px 36px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 230, 190, 0.2);
+    0 40px 80px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -18px 30px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 230, 190, 0.22);
+}
+
+.desk__shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 28%,
+    transparent 62%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  animation: desk-shine 7s ease-in-out infinite;
+}
+
+@keyframes desk-shine {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .desk__edge {
@@ -280,16 +381,11 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: transform 0.35s ease, filter 0.35s ease;
-  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.38));
+  transform-style: preserve-3d;
+  transform: translateZ(24px);
+  transition: filter 0.35s ease;
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.4));
   z-index: 3;
-}
-
-.desk-object:hover,
-.desk-object:focus-visible {
-  transform: translateY(-8px) scale(1.04);
-  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.5));
-  outline: none;
 }
 
 .desk-object__label {
@@ -544,6 +640,17 @@
   display: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .desk__shine {
+    animation: none;
+  }
+
+  .desk-object,
+  .desk__mug {
+    animation: none !important;
+  }
+}
+
 @media (max-width: 820px) {
   .desk {
     height: auto;
@@ -557,11 +664,8 @@
     display: block;
   }
 
-  .desk__stage,
-  .desk__hero,
-  .desk__beam,
-  .desk__legs,
-  .desk__lamp {
+  .desk__canvas-wrap,
+  .desk__hero {
     display: none !important;
   }
 
