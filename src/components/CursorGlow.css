@@ -1,0 +1,19 @@
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 280px;
+  margin: -140px 0 0 -140px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(
+    circle,
+    rgba(238, 243, 248, 0.09) 0%,
+    rgba(238, 243, 248, 0.03) 35%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}

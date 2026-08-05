@@ -1,0 +1,24 @@
+{
+  "name": "aaron-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "sync:resumes": "node -e \"const fs=require('fs');const p=require('path');const s='content/resumes';const d='public/resumes';fs.mkdirSync(d,{recursive:true});for(const f of fs.readdirSync(s))fs.copyFileSync(p.join(s,f),p.join(d,f));console.log('Resumes synced to public/resumes');\""
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.12",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "~5.9.2",
+    "vite": "^7.1.2"
+  }
+}
