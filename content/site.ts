@@ -51,8 +51,9 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/chun-kiat-lwi-058308287/",
     github: "https://github.com/AaaaaaaaaronL",
     wakatime: "https://wakatime.com/@Aaron_Lwi",
-    /** Add later, e.g. https://wa.me/60XXXXXXXXX */
-    whatsapp: "" as string,
+    whatsapp: "https://wa.me/60193410320",
+    phoneDisplay: "+60 19-341 0320",
+    phone: "+60193410320",
   },
   desk: {
     objects: [
@@ -300,6 +301,16 @@ export const site = {
       focus: "Economics & Accounting",
       summary:
         "SPM: 1 A+ and 4 A's — including Accounting (A+), Economics, Science, Mathematics, and History. Also earned Pearson LCCI Book-keeping & Accounts Level 2 with Distinction.",
+      subjects: [
+        { name: "Accounting (Prinsip Perakaunan)", grade: "A+" },
+        { name: "Economics (Ekonomi)", grade: "A" },
+        { name: "Science", grade: "A" },
+        { name: "Mathematics", grade: "A" },
+        { name: "Sejarah (History)", grade: "A" },
+        { name: "Bahasa Melayu", grade: "B" },
+        { name: "English", grade: "C" },
+        { name: "Moral", grade: "B" },
+      ],
     },
     university: {
       school: "Southern University College",

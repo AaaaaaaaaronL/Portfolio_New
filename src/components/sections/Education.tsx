@@ -2,7 +2,8 @@ import { useState } from "react";
 import { site } from "@content/site";
 
 export function Education() {
-  const [open, setOpen] = useState(false);
+  const [openSecondary, setOpenSecondary] = useState(false);
+  const [openUniversity, setOpenUniversity] = useState(false);
   const { secondary, university } = site.education;
 
   return (
@@ -16,6 +17,28 @@ export function Education() {
           <h3>{secondary.school}</h3>
           <p className="edu__focus">{secondary.focus}</p>
           <p>{secondary.summary}</p>
+
+          <button
+            className="btn edu__toggle"
+            aria-expanded={openSecondary}
+            onClick={() => setOpenSecondary((v) => !v)}
+          >
+            {openSecondary ? "Hide academic details" : "Show academic performance"}
+          </button>
+
+          {openSecondary ? (
+            <div className="edu__details">
+              <h4>SPM subjects</h4>
+              <ul className="edu__gpa">
+                {secondary.subjects.map((row) => (
+                  <li key={row.name}>
+                    <span>{row.name}</span>
+                    <strong>{row.grade}</strong>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </article>
 
         <article className="edu">
@@ -32,13 +55,13 @@ export function Education() {
 
           <button
             className="btn edu__toggle"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
+            aria-expanded={openUniversity}
+            onClick={() => setOpenUniversity((v) => !v)}
           >
-            {open ? "Hide academic details" : "Show academic performance"}
+            {openUniversity ? "Hide academic details" : "Show academic performance"}
           </button>
 
-          {open && (
+          {openUniversity ? (
             <div className="edu__details">
               <h4>Semester GPA</h4>
               <ul className="edu__gpa">
@@ -61,7 +84,7 @@ export function Education() {
                 ))}
               </ul>
             </div>
-          )}
+          ) : null}
         </article>
       </div>
     </section>

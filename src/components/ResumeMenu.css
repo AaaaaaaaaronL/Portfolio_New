@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.resume-menu__label-short {
+  display: none;
+}
+
 .resume-menu__trigger--compact {
   padding: 0.65rem 1rem;
   font-size: 0.85rem;
@@ -30,4 +34,26 @@
 
 .resume-menu__panel a:hover {
   background: rgba(196, 165, 116, 0.12);
+}
+
+@media (max-width: 820px) {
+  .resume-menu__label-full {
+    display: none;
+  }
+
+  .resume-menu__label-short {
+    display: inline;
+  }
+
+  .resume-menu .btn,
+  .resume-menu__trigger--compact {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .nav .resume-menu .btn {
+    padding: 0.42rem 0.7rem;
+    font-size: 0.78rem;
+  }
 }

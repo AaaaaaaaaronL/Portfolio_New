@@ -123,33 +123,56 @@ export function ContactModal({ open, onClose }: Props) {
   const whatsapp = site.social.whatsapp.trim();
 
   return (
-    <ModalShell open={open} onClose={onClose} title="Contact card" variant="card">
-      <div className="biz-card">
-        <div className="biz-card__front">
-          <p className="biz-card__brand">{site.name}</p>
-          <p className="biz-card__role">Web Developer · Communicator</p>
-          <p className="biz-card__legal">{site.legalName}</p>
-          <div className="biz-card__lines">
-            <a href={`mailto:${site.social.email}`}>{site.social.email}</a>
-            <a href={site.social.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a href={site.social.github} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-            {whatsapp ? (
-              <a href={whatsapp} target="_blank" rel="noreferrer">
-                WhatsApp
+    <ModalShell open={open} onClose={onClose} title="Business card" variant="card">
+      <article className="biz-card">
+        <div className="biz-card__face">
+          <header className="biz-card__left">
+            <div className="biz-card__mark" aria-hidden>
+              A
+            </div>
+            <div className="biz-card__identity">
+              <p className="biz-card__brand">{site.name}</p>
+              <p className="biz-card__legal">{site.legalName}</p>
+              <p className="biz-card__role">Web Developer · Communicator</p>
+            </div>
+            <p className="biz-card__place">{site.locationNote}</p>
+          </header>
+
+          <div className="biz-card__divider" aria-hidden />
+
+          <ul className="biz-card__contacts">
+            <li>
+              <span>Email</span>
+              <a href={`mailto:${site.social.email}`}>{site.social.email}</a>
+            </li>
+            <li>
+              <span>Mobile / WhatsApp</span>
+              <a href={whatsapp || `tel:${site.social.phone}`}>{site.social.phoneDisplay}</a>
+            </li>
+            <li>
+              <span>LinkedIn</span>
+              <a href={site.social.linkedin} target="_blank" rel="noreferrer">
+                Chun Kiat Lwi
               </a>
-            ) : (
-              <span>WhatsApp · coming soon</span>
-            )}
-          </div>
-          <div className="biz-card__cta">
-            <ResumeMenu />
-          </div>
+            </li>
+            <li>
+              <span>GitHub</span>
+              <a href={site.social.github} target="_blank" rel="noreferrer">
+                AaaaaaaaaronL
+              </a>
+            </li>
+          </ul>
         </div>
-      </div>
+
+        <div className="biz-card__actions">
+          {whatsapp ? (
+            <a className="btn biz-card__wa" href={whatsapp} target="_blank" rel="noreferrer">
+              WhatsApp
+            </a>
+          ) : null}
+          <ResumeMenu />
+        </div>
+      </article>
     </ModalShell>
   );
 }

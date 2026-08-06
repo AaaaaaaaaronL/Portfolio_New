@@ -1,7 +1,6 @@
 import { site } from "@content/site";
 import { Nav } from "./components/Nav";
 import { DeskExperience } from "./components/DeskExperience";
-import { About } from "./components/sections/About";
 import { Experience } from "./components/sections/Experience";
 import { Projects } from "./components/sections/Projects";
 import { Certificates } from "./components/sections/Certificates";
@@ -19,7 +18,6 @@ export default function App() {
       <Nav />
       <main>
         <DeskExperience />
-        <About />
         <Experience />
         <Projects />
         <Certificates />

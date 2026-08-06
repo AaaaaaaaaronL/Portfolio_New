@@ -1,6 +1,15 @@
 .desk {
   position: relative;
-  height: 240vh;
+  height: 340vh;
+}
+
+.desk__about-anchor {
+  position: absolute;
+  top: 78%;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
 }
 
 .desk__sticky {
@@ -578,6 +587,55 @@
     linear-gradient(225deg, transparent 49.5%, rgba(110, 90, 60, 0.3) 50%, transparent 50.5%);
 }
 
+.desk__about-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+
+.desk__about-static {
+  display: none;
+}
+
+.desk__about-bridge {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  display: block;
+  padding: calc(var(--nav-h) + 1.5rem) clamp(1.25rem, 5vw, 3.5rem) 2.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 5, 5, 0.55) 0%,
+    rgba(5, 5, 5, 0.92) 28%,
+    rgba(5, 5, 5, 0.98) 100%
+  );
+  pointer-events: none;
+}
+
+.desk__about-bridge .dossier,
+.desk__about-bridge a,
+.desk__about-static .dossier,
+.desk__about-static a {
+  pointer-events: auto;
+}
+
+.desk__about-bridge .section-title,
+.desk__about-static .section-title {
+  margin-top: 0.15rem;
+}
+
+.desk__about-bridge .section-sub,
+.desk__about-static .section-sub {
+  max-width: 42rem;
+}
+
+.desk__about-bridge .dossier,
+.desk__about-static .dossier {
+  margin-top: 1.75rem;
+  max-width: 52rem;
+}
+
 .desk__hero {
   position: absolute;
   z-index: 7;
@@ -656,6 +714,12 @@
     height: auto;
   }
 
+  .desk__about-anchor {
+    position: absolute;
+    top: auto;
+    bottom: 8rem;
+  }
+
   .desk__sticky {
     position: relative;
     height: auto;
@@ -665,8 +729,21 @@
   }
 
   .desk__canvas-wrap,
-  .desk__hero {
+  .desk__hero,
+  .desk__about-bridge {
     display: none !important;
+  }
+
+  .desk__about-slot {
+    position: relative;
+    inset: auto;
+    display: block;
+    pointer-events: auto;
+  }
+
+  .desk__about-static {
+    display: block;
+    padding: 2rem 0 0.5rem;
   }
 
   .desk__void {
@@ -696,6 +773,11 @@
     margin-top: 1.1rem;
   }
 
+  .desk__mobile-cta .resume-menu .btn {
+    width: auto;
+    max-width: 100%;
+  }
+
   .desk__mobile-rail {
     display: grid;
     grid-template-columns: 1fr;
@@ -720,27 +802,40 @@
     height: 2.4rem;
     border-radius: 10px;
     flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    color: #1c1610;
     background: linear-gradient(145deg, #c49a6c, #8a5e38);
+  }
+
+  .desk__mobile-icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   .desk__mobile-card--dossier .desk__mobile-icon {
     background: linear-gradient(145deg, #f0e6d6, #c5af8c);
+    color: #3a2c1c;
   }
 
   .desk__mobile-card--laptop .desk__mobile-icon {
     background: linear-gradient(145deg, #4a5564, #1a1f27);
+    color: #dce6f5;
   }
 
   .desk__mobile-card--folder .desk__mobile-icon {
     background: linear-gradient(145deg, #e0b14f, #a8731d);
+    color: #2a1c08;
   }
 
   .desk__mobile-card--certs .desk__mobile-icon {
     background: linear-gradient(145deg, #fffaf0, #d4c19a);
+    color: #5a4220;
   }
 
   .desk__mobile-card--envelope .desk__mobile-icon,
   .desk__mobile-card--drawer .desk__mobile-icon {
     background: linear-gradient(145deg, #efe8dc, #b9a88f);
+    color: #3a2c1c;
   }
 }

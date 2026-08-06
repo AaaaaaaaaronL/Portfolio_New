@@ -34,7 +34,8 @@ export function ResumeMenu({ compact = false, className = "" }: Props) {
         aria-haspopup="menu"
         onClick={() => setOpen((v) => !v)}
       >
-        {site.ctas.primary}
+        <span className="resume-menu__label-full">{site.ctas.primary}</span>
+        <span className="resume-menu__label-short">Resume</span>
         <span aria-hidden>▾</span>
       </button>
       {open && (

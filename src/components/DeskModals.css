@@ -43,10 +43,47 @@
 }
 
 .desk-modal__panel--card {
-  width: min(420px, 100%);
-  background: #12100e;
-  color: var(--text);
-  border: 1px solid rgba(196, 165, 116, 0.35);
+  width: min(560px, 94vw);
+  max-height: none;
+  background: transparent;
+  color: #1c1610;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.desk-modal__panel--card .desk-modal__top {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.15rem;
+  z-index: 2;
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.desk-modal__panel--card .desk-modal__top h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.desk-modal__panel--card .desk-modal__close {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(12, 10, 8, 0.72);
+  color: #f4efe8;
+  backdrop-filter: blur(8px);
+}
+
+.desk-modal__panel--card .desk-modal__body {
+  padding: 0;
+  overflow: visible;
 }
 
 .desk-modal__panel--screen {
@@ -294,40 +331,201 @@
   font-size: 1.4rem;
 }
 
-.biz-card__front {
-  padding: 0.35rem 0.15rem 0.25rem;
+.biz-card {
+  display: grid;
+  gap: 0.85rem;
+  filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.55));
+}
+
+.biz-card__face {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) 1px minmax(0, 1fr);
+  gap: 0 1.25rem;
+  padding: 1.5rem 1.55rem 1.35rem;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.55), transparent 28%),
+    linear-gradient(145deg, #f7f1e6 0%, #ebe0cc 48%, #e2d3bb 100%);
+  border: 1px solid rgba(120, 90, 50, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(90, 60, 30, 0.12);
+  overflow: hidden;
+}
+
+.biz-card__face::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(176, 138, 60, 0.28);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.biz-card__left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.biz-card__mark {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #2a2118, #1a1510);
+  color: #e8d5a8;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.biz-card__identity {
+  margin-top: auto;
 }
 
 .biz-card__brand {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 2.2rem;
-}
-
-.biz-card__role {
-  margin: 0.2rem 0 0;
-  color: var(--brass);
+  font-size: clamp(2rem, 4.5vw, 2.55rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #1c1610;
 }
 
 .biz-card__legal {
-  margin: 0.15rem 0 1rem;
-  color: var(--muted);
+  margin: 0.35rem 0 0;
+  color: rgba(42, 33, 24, 0.62);
   font-size: 0.92rem;
 }
 
-.biz-card__lines {
-  display: grid;
-  gap: 0.45rem;
-  margin-bottom: 1.1rem;
+.biz-card__role {
+  margin: 0.55rem 0 0;
+  color: #8a6a38;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.biz-card__lines a:hover {
-  color: var(--brass);
-}
-
-.biz-card__cta {
+.biz-card__place {
+  margin: 0;
   padding-top: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(120, 90, 50, 0.18);
+  font-size: 0.78rem;
+  color: rgba(42, 33, 24, 0.55);
+}
+
+.biz-card__divider {
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(120, 90, 50, 0.35) 18%,
+    rgba(120, 90, 50, 0.35) 82%,
+    transparent
+  );
+}
+
+.biz-card__contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0.1rem 0 0;
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.biz-card__contacts li {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.biz-card__contacts span {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(42, 33, 24, 0.5);
+}
+
+.biz-card__contacts a {
+  color: #1c1610;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.biz-card__contacts a:hover {
+  color: #8a6a38;
+}
+
+.biz-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  position: relative;
+  z-index: 3;
+}
+
+.biz-card__actions .btn,
+.biz-card__actions .resume-menu__trigger {
+  border-color: rgba(196, 165, 116, 0.45);
+  color: #f4efe8;
+  background: rgba(20, 16, 12, 0.82);
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+}
+
+.biz-card__actions .btn:hover,
+.biz-card__actions .resume-menu__trigger:hover {
+  background: rgba(40, 32, 24, 0.95);
+  border-color: rgba(196, 165, 116, 0.7);
+}
+
+.biz-card__actions .resume-menu__panel {
+  top: auto;
+  bottom: calc(100% + 0.45rem);
+}
+
+@media (max-width: 560px) {
+  .biz-card__face {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .biz-card__divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(120, 90, 50, 0.35) 18%,
+      rgba(120, 90, 50, 0.35) 82%,
+      transparent
+    );
+  }
+
+  .biz-card__actions {
+    justify-content: stretch;
+  }
+
+  .biz-card__actions .btn,
+  .biz-card__actions .resume-menu {
+    flex: 1;
+  }
+
+  .biz-card__actions .resume-menu__trigger {
+    width: 100%;
+  }
 }
 
 .project-screen h3 {
