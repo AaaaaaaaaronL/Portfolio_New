@@ -7,6 +7,10 @@
  * After editing resume PDFs, copy them to public/resumes/ or run: npm run sync:resumes
  */
 
+/** Prefix public assets for GitHub Pages (`/Portfolio_New/`) and local `/`. */
+const asset = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 export const site = {
   name: "Aaron",
   legalName: "Chun Kiat Lwi",
@@ -29,12 +33,12 @@ export const site = {
     resumes: [
       {
         label: "IT Resume",
-        href: "/resumes/Aaron_Lwi_Resume_IT.pdf",
+        href: asset("resumes/Aaron_Lwi_Resume_IT.pdf"),
         filename: "Aaron_Lwi_Resume_IT.pdf",
       },
       {
         label: "Customer Service Resume",
-        href: "/resumes/Aaron_Lwi_Resume_CS.pdf",
+        href: asset("resumes/Aaron_Lwi_Resume_CS.pdf"),
         filename: "Aaron_Lwi_Resume_CS.pdf",
       },
     ],
@@ -82,7 +86,7 @@ export const site = {
   about: {
     headline: "Hi, I'm Aaron.",
     body: "I like learning new things and turning unclear problems into clear next steps — whether that means shipping web features or guiding someone through a tough support case. I am not limited to one lane: I build, I listen, and I communicate under pressure.",
-    photo: "/images/aaron-portrait.png",
+    photo: asset("images/aaron-portrait.png"),
     dossier: [
       { label: "Nickname", value: "Aaron" },
       { label: "Legal name", value: "Chun Kiat Lwi" },
