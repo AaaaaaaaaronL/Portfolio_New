@@ -12,7 +12,7 @@ export function Contact() {
 
       <div className="contact panel">
         <div className="contact__actions">
-          <ResumeMenu />
+          <ResumeMenu placement="up" />
           <a className="btn" href={site.social.linkedin} target="_blank" rel="noreferrer">
             LinkedIn
           </a>

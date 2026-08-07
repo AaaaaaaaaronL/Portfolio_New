@@ -477,7 +477,7 @@
 }
 
 .biz-card__actions .btn,
-.biz-card__actions .resume-menu__trigger {
+.biz-card__actions .resume-menu .btn {
   border-color: rgba(196, 165, 116, 0.45);
   color: #f4efe8;
   background: rgba(20, 16, 12, 0.82);
@@ -486,14 +486,14 @@
 }
 
 .biz-card__actions .btn:hover,
-.biz-card__actions .resume-menu__trigger:hover {
+.biz-card__actions .resume-menu .btn:hover {
   background: rgba(40, 32, 24, 0.95);
   border-color: rgba(196, 165, 116, 0.7);
 }
 
 .biz-card__actions .resume-menu__panel {
-  top: auto;
-  bottom: calc(100% + 0.45rem);
+  left: auto;
+  right: 0;
 }
 
 @media (max-width: 560px) {
@@ -523,7 +523,7 @@
     flex: 1;
   }
 
-  .biz-card__actions .resume-menu__trigger {
+  .biz-card__actions .resume-menu .btn {
     width: 100%;
   }
 }

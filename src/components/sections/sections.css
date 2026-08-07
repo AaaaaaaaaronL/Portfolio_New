@@ -448,12 +448,21 @@
   flex-wrap: wrap;
   gap: 0.65rem;
   align-items: center;
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+}
+
+.contact.panel {
+  overflow: visible;
 }
 
 .contact__email {
   margin: 1.25rem 0 0;
   font-family: var(--font-display);
   font-size: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .footer {

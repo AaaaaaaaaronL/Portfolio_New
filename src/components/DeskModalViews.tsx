@@ -170,7 +170,7 @@ export function ContactModal({ open, onClose }: Props) {
               WhatsApp
             </a>
           ) : null}
-          <ResumeMenu />
+          <ResumeMenu placement="up" />
         </div>
       </article>
     </ModalShell>

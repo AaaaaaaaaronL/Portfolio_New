@@ -1,5 +1,13 @@
 .resume-menu {
   position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+
+.resume-menu.is-open {
+  z-index: 40;
 }
 
 .resume-menu__label-short {
@@ -14,14 +22,19 @@
 .resume-menu__panel {
   position: absolute;
   top: calc(100% + 0.45rem);
-  right: 0;
+  left: 0;
   min-width: 14rem;
   padding: 0.4rem;
   border-radius: 14px;
   border: 1px solid var(--line);
-  background: rgba(16, 13, 11, 0.96);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-  z-index: 60;
+  background: #12100e;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  z-index: 50;
+}
+
+.resume-menu--up .resume-menu__panel {
+  top: auto;
+  bottom: calc(100% + 0.45rem);
 }
 
 .resume-menu__panel a {
@@ -30,9 +43,11 @@
   border-radius: 10px;
   font-size: 0.9rem;
   color: var(--text);
+  background: transparent;
 }
 
-.resume-menu__panel a:hover {
+.resume-menu__panel a:hover,
+.resume-menu__panel a:focus-visible {
   background: rgba(196, 165, 116, 0.12);
 }
 
@@ -55,5 +70,21 @@
   .nav .resume-menu .btn {
     padding: 0.42rem 0.7rem;
     font-size: 0.78rem;
+  }
+
+  .nav .resume-menu__panel {
+    left: auto;
+    right: 0;
+  }
+
+  /* Contact: keep menu above siblings / email, open upward */
+  .contact .resume-menu {
+    width: auto;
+  }
+
+  .contact .resume-menu__panel {
+    left: 0;
+    right: auto;
+    min-width: min(18rem, calc(100vw - 2.5rem));
   }
 }
