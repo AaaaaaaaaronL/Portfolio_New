@@ -30,9 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Sync resumes
-        run: npm run sync:resumes
-
       - name: Build
         run: npm run build
 

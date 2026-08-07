@@ -1,0 +1,81 @@
+{
+  "fetchedAt": "2026-08-07T05:10:31.612Z",
+  "username": "Aaron_Lwi",
+  "total": "910 hrs",
+  "dailyAverage": "5 hrs",
+  "range": "since Apr 16 2025",
+  "languages": [
+    {
+      "name": "C#",
+      "percent": 23.24,
+      "text": "215 hrs 58 mins"
+    },
+    {
+      "name": "JavaScript",
+      "percent": 22.72,
+      "text": "211 hrs 10 mins"
+    },
+    {
+      "name": "ASP.NET",
+      "percent": 12.55,
+      "text": "116 hrs 39 mins"
+    },
+    {
+      "name": "Blade Template",
+      "percent": 9.39,
+      "text": "87 hrs 14 mins"
+    },
+    {
+      "name": "Binary",
+      "percent": 8.11,
+      "text": "75 hrs 20 mins"
+    },
+    {
+      "name": "PHP",
+      "percent": 7.87,
+      "text": "73 hrs 6 mins"
+    },
+    {
+      "name": "Dart",
+      "percent": 4.46,
+      "text": "41 hrs 27 mins"
+    },
+    {
+      "name": "CSS",
+      "percent": 4.02,
+      "text": "37 hrs 20 mins"
+    },
+    {
+      "name": "Python",
+      "percent": 3.24,
+      "text": "30 hrs 4 mins"
+    },
+    {
+      "name": "Other",
+      "percent": 2.09,
+      "text": "19 hrs 25 mins"
+    }
+  ],
+  "editors": [
+    {
+      "name": "Visual Studio",
+      "percent": 47.54,
+      "text": "441 hrs 50 mins"
+    },
+    {
+      "name": "VS Code",
+      "percent": 44.27,
+      "text": "411 hrs 28 mins"
+    },
+    {
+      "name": "Cursor",
+      "percent": 4.88,
+      "text": "45 hrs 22 mins"
+    },
+    {
+      "name": "PyCharm",
+      "percent": 3.25,
+      "text": "30 hrs 12 mins"
+    }
+  ]
+}

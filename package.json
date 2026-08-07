@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "fetch:wakatime": "node scripts/fetch-wakatime.mjs",
+    "prebuild": "npm run sync:resumes && npm run fetch:wakatime",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "sync:resumes": "node -e \"const fs=require('fs');const p=require('path');const s='content/resumes';const d='public/resumes';fs.mkdirSync(d,{recursive:true});for(const f of fs.readdirSync(s))fs.copyFileSync(p.join(s,f),p.join(d,f));console.log('Resumes synced to public/resumes');\""

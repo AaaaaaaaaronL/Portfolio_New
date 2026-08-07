@@ -417,7 +417,7 @@ export const site = {
     subhead: "A living snapshot of how I spend time learning and building.",
     username: "Aaron_Lwi",
     profileUrl: "https://wakatime.com/@Aaron_Lwi",
-    note: "Stats below are loaded live from the WakaTime public API.",
+    note: "Language and editor charts are generated from WakaTime at deploy time and shown on this page.",
   },
   contact: {
     headline: "Let’s explore how we can grow.",

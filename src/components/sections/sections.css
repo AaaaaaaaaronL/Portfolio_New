@@ -300,6 +300,20 @@
   background: #fff;
 }
 
+.waka__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+}
+
+.waka__stat {
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
 .waka__summary {
   margin-bottom: 1.1rem;
   padding-bottom: 0.9rem;
@@ -310,6 +324,71 @@
   margin: 0.25rem 0 0;
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.waka__total--sm {
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+}
+
+.waka__visual {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.waka__donut-wrap {
+  padding: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.waka__donut {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.waka__donut-label {
+  fill: rgba(196, 165, 116, 0.95);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.waka__donut-value {
+  fill: #f4efe8;
+  font-size: 18px;
+  font-family: var(--font-display);
+}
+
+.waka__legend {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.waka__legend li {
+  display: grid;
+  grid-template-columns: 0.7rem 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  font-size: 0.84rem;
+}
+
+.waka__legend strong {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.waka__swatch {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
 }
 
 .waka__chart {
@@ -356,6 +435,12 @@
   display: block;
   height: 100%;
   border-radius: inherit;
+}
+
+@media (max-width: 820px) {
+  .waka__visual {
+    grid-template-columns: 1fr;
+  }
 }
 
 .contact__actions {
